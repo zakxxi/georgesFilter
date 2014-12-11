@@ -3,7 +3,8 @@ SDrop drop;
 
 import java.util.Calendar;
 
-PImage img;
+PImage logoGeorges;
+PImage backgroundImage;
 
 int tileCountX = 10;
 int tileCountY = 10;
@@ -20,8 +21,8 @@ boolean randomMode = true;
 
 
 void setup() {
-  size(1000, 1000); 
-  img = loadImage("georgesBeta.jpg");
+  size(500, 500); 
+  backgroundImage = loadImage("georgesBeta.jpg");
   noCursor();
 
   tileWidth = width/tileCountY;
@@ -39,13 +40,13 @@ void draw() {
     cropX = constrain(mouseX, 0, width-tileWidth);
     cropY = constrain(mouseY, 0, height-tileHeight);    
 
-    if (img !=null) {
-      image(img, 0, 0);
+    if (backgroundImage !=null) {
+      image(backgroundImage, 0, 0);
     }
 
 
 
-    //   image(img, 0, 0);
+    //   image(backgroundImage, 0, 0);
     noFill();
     stroke(255);
     rect(cropX, cropY, tileWidth, tileHeight);
@@ -76,7 +77,7 @@ void cropTiles() {
       }
       cropX = constrain(cropX, 0, width-tileWidth);
       cropY = constrain(cropY, 0, height-tileHeight);
-      imageTiles[i++] = img.get(cropX, cropY, tileWidth, tileHeight);
+      imageTiles[i++] = backgroundImage.get(cropX, cropY, tileWidth, tileHeight);
     }
   }
 }
@@ -116,8 +117,8 @@ void dropEvent(DropEvent theDropEvent) {
   // if the dropped object is an image, then 
   // load the image into our PImage.
   if (theDropEvent.isImage()) {
-    println("### loading image ...");
-    img = theDropEvent.loadImage();
+    println("### loading image ...");  
+    backgroundImage = theDropEvent.loadImage();
   }
 }
 
