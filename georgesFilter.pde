@@ -21,7 +21,7 @@ boolean randomMode = true;
 
 void setup() {
   size(1000, 1000); 
-  //  img = loadImage("image.jpg");
+  img = loadImage("georgesBeta.jpg");
   noCursor();
 
   tileWidth = width/tileCountY;
