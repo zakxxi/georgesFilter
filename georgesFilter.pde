@@ -18,6 +18,7 @@ int cropY = 0;
 
 boolean selectMode = true;
 boolean randomMode = true; 
+boolean logoColor = true; // true = white, false = black
 
 float randomfactor = 1.6;
 
@@ -29,9 +30,8 @@ void setup() {
   tileWidth = width/tileCountY;
   tileHeight = height/tileCountX;
 
-  logoGeorges = loadImage("logo.png");
   backgroundImage = loadImage("background.png");
-
+  printLogo(true);
   drop = new SDrop(this);
 }
 
@@ -44,12 +44,10 @@ void draw() {
 
 
     image(backgroundImage, 0, 0);
-   // image(logoGeorges, 0, 0);
 
     noFill();
     stroke(255);
     rect(cropX, cropY, tileWidth, tileHeight);
-    
   } else {
     // reassemble image
     int i = 0;
@@ -60,9 +58,8 @@ void draw() {
       }
     }
   }
-  
-      image(logoGeorges, 0, 0);
 
+  image(logoGeorges, 0, 0);
 }
 
 void cropTiles() {
@@ -83,7 +80,16 @@ void cropTiles() {
       imageTiles[i++] = backgroundImage.get(cropX, cropY, tileWidth, tileHeight);
     }
   }
-  
+}
+
+void printLogo(boolean logoColor) {
+  if (logoColor) {
+    logoGeorges = loadImage("logo-white.png");
+
+  } else {
+    logoGeorges = loadImage("logo-black.png");
+
+  }
 }
 
 void dropEvent(DropEvent theDropEvent) {
@@ -111,6 +117,9 @@ void mouseReleased() {
 
 void keyReleased() {
   if (key == 's' || key == 'S') saveFrame(timestamp()+"_##.png");
+  if (key == 'b' || key == 'B') printLogo(true);
+  if (key == 'n' || key == 'N') printLogo(false);
+
 }
 
 // timestamp
