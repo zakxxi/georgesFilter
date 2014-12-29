@@ -27,8 +27,15 @@ int windowSize = 0;
 
 void setup() {
   windowSize = displayHeight-(displayHeight/10);
+  println(windowSize);
 
-  size(windowSize, windowSize); 
+// max size security
+  if (windowSize < 1000) {
+    size(windowSize, windowSize);
+  } else {
+    size(1000, 1000);
+  }
+
   noCursor();
 
   tileWidth = width/tileCountY;
@@ -89,7 +96,6 @@ void cropTiles() {
 void printLogo(int logoColor) {
   if (logoColor == 0) {
     logoGeorges = loadImage("logo-white.png");
-
   }
   if (logoColor == 1) {
     logoGeorges = loadImage("logo-black.png");
@@ -127,8 +133,6 @@ void keyReleased() {
   if (key == 'b' || key == 'B') printLogo(0);
   if (key == 'n' || key == 'N') printLogo(1);
   if (key == ',' || key == '?') printLogo(2);
-
-
 }
 
 // timestamp
