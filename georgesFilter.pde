@@ -18,7 +18,7 @@ int cropY = 0;
 
 boolean selectMode = true;
 boolean randomMode = true; 
-boolean logoColor = true; // true = white, false = black
+int logoColor = 0; // 0 = white, 1 = black, 2 = nologo
 
 float randomfactor = 1.6;
 
@@ -31,7 +31,7 @@ void setup() {
   tileHeight = height/tileCountX;
 
   backgroundImage = loadImage("background.png");
-  printLogo(true);
+  printLogo(0);
   drop = new SDrop(this);
 }
 
@@ -82,11 +82,11 @@ void cropTiles() {
   }
 }
 
-void printLogo(boolean logoColor) {
-  if (logoColor) {
+void printLogo(int logoColor) {
+  if (logoColor == 0) {
     logoGeorges = loadImage("logo-white.png");
 
-  } else {
+  } else if (logoColor == 1) {
     logoGeorges = loadImage("logo-black.png");
 
   }
@@ -117,8 +117,8 @@ void mouseReleased() {
 
 void keyReleased() {
   if (key == 's' || key == 'S') saveFrame(timestamp()+"_##.png");
-  if (key == 'b' || key == 'B') printLogo(true);
-  if (key == 'n' || key == 'N') printLogo(false);
+  if (key == 'b' || key == 'B') printLogo(0);
+  if (key == 'n' || key == 'N') printLogo(1);
 
 }
 
