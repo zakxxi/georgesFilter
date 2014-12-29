@@ -22,9 +22,13 @@ int logoColor = 0; // 0 = white, 1 = black, 2 = nologo
 
 float randomfactor = 1.6;
 
+int windowSize = 0;
+
 
 void setup() {
-  size(1000, 1000); 
+  windowSize = displayHeight-(displayHeight/10);
+
+  size(windowSize, windowSize); 
   noCursor();
 
   tileWidth = width/tileCountY;
@@ -43,7 +47,7 @@ void draw() {
     cropY = constrain(mouseY, 0, height-tileHeight);    
 
 
-    image(backgroundImage, 0, 0);
+    image(backgroundImage, 0, 0, windowSize, windowSize);
 
     noFill();
     stroke(255);
@@ -59,7 +63,7 @@ void draw() {
     }
   }
 
-  image(logoGeorges, 0, 0);
+  image(logoGeorges, 0, 0, windowSize, windowSize);
 }
 
 void cropTiles() {
@@ -86,9 +90,12 @@ void printLogo(int logoColor) {
   if (logoColor == 0) {
     logoGeorges = loadImage("logo-white.png");
 
-  } else if (logoColor == 1) {
+  }
+  if (logoColor == 1) {
     logoGeorges = loadImage("logo-black.png");
-
+  }
+  if (logoColor == 2) {
+    logoGeorges = loadImage("nologo.png");
   }
 }
 
@@ -119,6 +126,8 @@ void keyReleased() {
   if (key == 's' || key == 'S') saveFrame(timestamp()+"_##.png");
   if (key == 'b' || key == 'B') printLogo(0);
   if (key == 'n' || key == 'N') printLogo(1);
+  if (key == ',' || key == '?') printLogo(2);
+
 
 }
 
