@@ -26,14 +26,15 @@ int windowSize = 0;
 
 
 void setup() {
-  windowSize = displayHeight-(displayHeight/10);
   println(windowSize);
 
-// max size security
-  if (windowSize < 1000) {
+  // max size security
+  if (displayHeight <= 1079) {
+    windowSize = 800;
     size(windowSize, windowSize);
   } else {
-    size(1000, 1000);
+    windowSize = 1000;
+    size(windowSize, windowSize);
   }
 
   noCursor();
@@ -42,6 +43,7 @@ void setup() {
   tileHeight = height/tileCountX;
 
   backgroundImage = loadImage("background.png");
+
   printLogo(0);
   drop = new SDrop(this);
 }
@@ -49,12 +51,15 @@ void setup() {
 
 void draw() {
   if (selectMode == true) {
+    
+    if (backgroundImage.width >= width) {
+    backgroundImage.resize(width, backgroundImage.height * (height/backgroundImage.height));
+}
+    image(backgroundImage, 0, 0);
+
     // in selection mode, a white selection rectangle is drawn over the image
     cropX = constrain(mouseX, 0, width-tileWidth);
-    cropY = constrain(mouseY, 0, height-tileHeight);    
-
-
-    image(backgroundImage, 0, 0, windowSize, windowSize);
+    cropY = constrain(mouseY, 0, height-tileHeight);
 
     noFill();
     stroke(255);
