@@ -30,7 +30,7 @@ void setup() {
 
   // max size security
   if (displayHeight <= 1079) {
-    windowSize = 800;
+    windowSize = int(displayHeight*0.9);
     size(windowSize, windowSize);
   } else {
     windowSize = 1000;
@@ -51,10 +51,10 @@ void setup() {
 
 void draw() {
   if (selectMode == true) {
-    
+
     if (backgroundImage.width >= width) {
-    backgroundImage.resize(width, backgroundImage.height * (height/backgroundImage.height));
-}
+      backgroundImage.resize(width, backgroundImage.height * (height/backgroundImage.height));
+    }
     image(backgroundImage, 0, 0);
 
     // in selection mode, a white selection rectangle is drawn over the image
